@@ -3,4 +3,4 @@ Installation instructions for Mediawiki-Akismet.
 1) Install Mediawiki and verify that it's working.
 2) Create the directory INSTALLDIR/extensions/Aksimet on the server and copy the Mediawiki-Aksimet files to the directory.
 3) Copy config_example.php to config.php and edit the variables in it to match your server settings.
-4) Run the SQL commands in create_table.sql on your MySQL server.
+4) Using a web browser, navigate to http://<MediawikiURL>/extensions/Aksimet/install.php and click the "Recreate the table" link.
