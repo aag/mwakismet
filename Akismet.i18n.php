@@ -28,7 +28,7 @@ function mwAkismetMessages(){
     
         /* English */
         'en' => array(
-            'spam-detected' => 'Please do not submit spam.',
+            'spam-detected' => '<span style="color: red">Warning:</span> Akismet detected spam! Edit unsuccessful.',
             'akismetadmin' => 'Akismet Admin'
         ),
 
