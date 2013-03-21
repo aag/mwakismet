@@ -69,6 +69,7 @@ class MwAkismet
         $html_diff = $this->getHtmlDiff($title, $oldText, $newText);
         
         $this->addSuspectedSpamToDB($page_id, $rev_id, $newText, $username, $submitted_diff, $html_diff);
+        return true; // continue processing
     }
         
 
