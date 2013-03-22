@@ -40,7 +40,6 @@ class MwAkismet
         // Don't allow the edit to be persisted.  Display the edit page again with an error message
         if ($containsSpam){
             // Add the edit to the database, so the user can view it manually later.
-<<<<<<< HEAD
             if ( !empty( $editor->mArticle->mRevision ) ){
                 $rev_id = $editor->mArticle->mRevision->getId();
             } else {
@@ -52,8 +51,6 @@ class MwAkismet
             $html_diff = $this->getHtmlDiff($title, $oldText, $newText);
             $this->addSuspectedSpamToDB($page_id, $rev_id, $newText, $username, $submitted_diff, $html_diff);
 
-=======
->>>>>>> f64d065ac43e575ba37f3be0980f12fa883c0b73
             $spamDetectedMsg = wfMsg( 'spam-detected' );
             $error = "<b>$spamDetectedMsg</b>";
             $editor->showEditForm( array( &$this, 'editCallback' ) );
