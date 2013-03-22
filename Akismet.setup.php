@@ -42,7 +42,6 @@ $wgAutoloadClasses['AkismetAdmin'] = dirname(__FILE__) . '/includes/AkismetAdmin
 
 // Register the edit handler
 $wgHooks['EditFilter'][] = array(new MwAkismet(), 'checkEditPageWithAkismet');
-$wgHooks['ArticleSaveComplete'][] = array (new MwAkismet(), 'saveMetadataToDB');
 
 // Register the admin special page
 $wgSpecialPages['AkismetAdmin'] = 'AkismetAdmin';

@@ -62,29 +62,6 @@ class MwAkismet
         return true;
     }
     
-    // Listening on ArticleSaveComplete.
-    // It's passed the spam check. 
-    // newer: PageContentSaveComplete. skipping for now. 
-    public function saveMetadataToDB(&$article, &$user, $text, $summary, $minoredit,
-            $watchthis, $sectionanchor, &$flags, $revision, &$status, $baseRevId) {
-        global $wgUser;
-        
-        $oldText = $article->getContent();
-        $newText = $text;
-        $username = $wgUser->getName();
-
-        $rev_id = $article->mRevision->getId();
-        $page_id = $article->getId();
-        $submitted_diff = $this->extractDiff($oldText, $text);
-        $title = $article->getTitle();
-        $html_diff = $this->getHtmlDiff($title, $oldText, $newText);
-        
-        $this->addSuspectedSpamToDB($page_id, $rev_id, $newText, $username, $submitted_diff, $html_diff);
-        return true; // continue processing
-    }
-        
-
-
     // Gets the diff of two texts and queries the Akismet servers with it.
     private function changeIsSpam($oldText, $newText, $author, $permalink){
         $diff = $this->extractDiff($oldText, $newText);
