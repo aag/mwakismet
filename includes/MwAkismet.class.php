@@ -40,7 +40,11 @@ class MwAkismet
         // Don't allow the edit to be persisted.  Display the edit page again with an error message
         if ($containsSpam){
             // Add the edit to the database, so the user can view it manually later.
-            $rev_id = $editor->mArticle->mRevision->getId();
+            if ( !empty( $editor->mArticle->mRevision ) ){
+                $rev_id = $editor->mArticle->mRevision->getId();
+            } else {
+                $rev_id = null;
+            }
             $page_id = $editor->mArticle->getId();
             $submitted_diff = $this->extractDiff($oldText, $newText);
             $title = $editor->mArticle->getTitle();
