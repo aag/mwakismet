@@ -24,7 +24,14 @@
  *
  */
 
-require_once("config.php");
+$config_file = "config.php";
+
+if(!file_exists($config_file)){
+    echo "Missing config: $config_file";
+    die;
+}
+
+require_once $config_file;
 
 $userSuccessMsg = "";
 $command = $_GET['do'];
