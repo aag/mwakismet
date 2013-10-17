@@ -16,7 +16,7 @@ Installation instructions for Mediawiki-Akismet.
    lines near the end of the file, but before the "?>":
 
 // Akismet extension
-include( $IP . '/extensions/Akismet/Akismet.setup.php' );
+include( $IP . '/extensions/Akismet/Akismet.php' );
 $wgMWAkismetKey = '1234567890ab';
 $wgMWAkismetURL = 'http://www.example.com/';
 

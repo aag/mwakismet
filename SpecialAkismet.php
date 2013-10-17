@@ -5,7 +5,7 @@
  *
  * File started on: 2007.12.26
  *
- * Copyright 2007 Adam Goforth
+ * Copyright 2007-2013 Adam Goforth
  *
  * This file is part of Mediawiki-Akismet.
  *
@@ -24,17 +24,15 @@
  *
  */
 
-require_once("AkismetEdit.class.php");
+require_once(__DIR__ . "/includes/AkismetEdit.class.php");
 
-class AkismetAdmin extends SpecialPage
+class SpecialAkismet extends SpecialPage
 {
-    function AkismetAdmin(){
-        SpecialPage::SpecialPage("AkismetAdmin");
+    function __construct() {
+        parent::__construct('Akismet');
     }
 
     function execute($par){
-        mwAkismetLoadi18nMessages();
-        
         global $wgOut;
         $db =& wfGetDB( DB_SLAVE );
 

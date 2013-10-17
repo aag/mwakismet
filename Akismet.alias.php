@@ -1,10 +1,10 @@
 <?php
-/*
- * Internationalization file for the Akismet Mediawiki extension.
+/**
+ * Aliases for the Mediawiki Akismet extension.
  *
- * File started on: 2007.10.16
+ * File started on: 2013.10.17
  *
- * Copyright 2007-2013 Adam Goforth
+ * Copyright 2013 Adam Goforth
  *
  * This file is part of Mediawiki-Akismet.
  *
@@ -24,25 +24,21 @@
  * @file
  * @ingroup Extensions
  */
-
-$messages = array();
+ 
+$specialPageAliases = array();
  
 /** English
  * @author Adam Goforth
  */
-$messages['en'] = array(
-    'akismet' => 'Akismet Admin', // Important! This is the string that appears on Special:SpecialPages
-    'akismet-desc' => 'Adds Akismet integration to Mediawiki.',
-    'spam-detected' => '<span style="color: red">Warning:</span> Akismet detected spam! Edit unsuccessful.',
+$specialPageAliases['en'] = array(
+    'Akismet' => array('Akismet', 'Akismet'),
 );
- 
+
 /** Deutsch (German)
  * @author Adam Goforth
  */
-$messages['de'] = array(
-    'akismet' => 'Akismet Admin',
-    'akismet-desc' => 'Adds Akismet integration to Mediawiki.',
-    'spam-detected' => '<span style="color: red">Warnung:</span> Die Änderung wurde von Akismet als spam eingestuft! Bearbeitung nicht erfolgreich.',
+$specialPageAliases['de'] = array(
+    'Akismet' => array('Akismet', 'Akismet'),
 );
 
-?>
+
