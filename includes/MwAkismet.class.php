@@ -28,7 +28,6 @@ class MwAkismet
     // Listening to the EditFilter event.
     // Returning true will allow the edit to be saved, returning false will require re-editing.
     public function checkEditPageWithAkismet($editor, $newText, $section, &$error){
-        mwAkismetLoadi18nMessages();
         global $wgUser;
         
         $oldText = $editor->mArticle->getContent();
