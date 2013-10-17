@@ -30,7 +30,7 @@ class AkismetEdit
     public static function createUserJudgeHTML($edit_id, $page_id, $timestamp, $username, $html_diff){
         $article_title = self::getArticleTitleFromID($page_id);
 
-		$shortdiff = self::shortenDiffTable($html_diff);
+		//$shortdiff = self::shortenDiffTable($html_diff);
 
         // Truncate
         // Create the HTML
@@ -38,7 +38,9 @@ class AkismetEdit
         $htmlout .= "<h4 style=\"background-color: lightgray; padding: 5px;\">" . $article_title . "<br />\n";
         $htmlout .= $timestamp . "<br />\n";
         $htmlout .= $username . "</h4>\n";
-        $htmlout .= $shortdiff . "\n";
+        $htmlout .= "<div class=\"diffholder\" style=\"height: 200px; overflow: auto;\">\n";
+        $htmlout .= $html_diff . "\n";
+        $htmlout .= "</div>\n";
         $htmlout .= "<div style=\"background-color: lightgray\">\n";
         $htmlout .= "<label for=\"spam-" . $edit_id . "\">\n";
         $htmlout .= "<input type=\"checkbox\" id=\"spam-" . $edit_id . "\" name=\"not_spam[]\" value=\"" . $edit_id . "\" />\n";
