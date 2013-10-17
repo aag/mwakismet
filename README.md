@@ -9,7 +9,7 @@ to the Akismet servers.
 Requirements
 ------------
 Mediawiki-Akismet requires a working installation of MediaWiki, PHP 5, and an
-Akismet account.  The extension has been tested with MediaWiki 1.19, and
+Akismet account.  The extension has been tested with MediaWiki 1.19 and
 PHP 5.4, but it may work on earlier versions.
 
 Installing
