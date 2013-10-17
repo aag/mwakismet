@@ -37,7 +37,7 @@ class SpecialAkismet extends SpecialPage
         $db =& wfGetDB( DB_SLAVE );
 
         $this->setHeaders();
-        $wgOut->addStyle( 'common/diff.css' );
+        $wgOut->addModuleStyles('mediawiki.action.history.diff');
 
         $rowcount = AkismetEdit::getSpamEditsCount();
 
