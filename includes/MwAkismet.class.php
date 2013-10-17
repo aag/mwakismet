@@ -114,7 +114,7 @@ class MwAkismet
     /**
      *  Gets the diff of two strings.  The algorithm only returns lines that were added or changed 
      *  in the newText.  It does not show subtracted lines or the changes within a line (it just
-     *  includes the whole line if it was changed.
+     *  includes the whole line if it was changed).
      */
     public function extractDiff(&$oldText, &$newText){
         // Nothing was added if the newText is empty
