@@ -22,23 +22,13 @@
  * along with Mediawiki-Akismet.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-if (!defined('SIMPLE_TEST')){
-    define('SIMPLE_TEST', '/usr/local/apache2/htdocs/SimpleTest/');
-}
-require_once(SIMPLE_TEST . 'unit_tester.php');
-require_once(SIMPLE_TEST . 'reporter.php');
-
-require_once('./includes/MwAkismet.class.php');
+require_once(__DIR__ . '/../includes/MwAkismet.class.php');
 
 // Set up the global variables for the MWAkismet class
 $wgMWAkismetKey = '69a535815104';
 $wgMWAkismetURL = 'http://plugintesting.example.com/';
 
-class TestMwAkismet extends UnitTestCase {
-    function TestMwAkismet() {
-        $this->UnitTestCase();
-    }
-    
+class MwAkismetTest extends MediaWikiTestCase {
     function testExtractDiffEqual(){
         $mwAkismet = new MwAkismet();
         
@@ -47,21 +37,21 @@ class TestMwAkismet extends UnitTestCase {
         $newText = "";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "");
+        $this->assertEquals($result, "");
         
         // Two short (single line) strings
         $oldText = "one";
         $newText = "one";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "");
+        $this->assertEquals($result, "");
         
         // Two longer (multi-line) strings
         $oldText = "one\ntwo\nthree";
         $newText = "one\ntwo\nthree";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "");
+        $this->assertEquals($result, "");
     }
     
     function testExtractDiffRemoveLines(){
@@ -72,78 +62,78 @@ class TestMwAkismet extends UnitTestCase {
         $newText = "";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "");
+        $this->assertEquals($result, "");
         
         // Remove 1 line from a 2-line text
         $oldText = "one\ntwo";
         $newText = "one";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "");
+        $this->assertEquals($result, "");
         
         $oldText = "one\ntwo";
         $newText = "two";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "");
+        $this->assertEquals($result, "");
         
         // Remove 1 line from a 3-line text
         $oldText = "one\ntwo\nthree";
         $newText = "one\nthree";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "");
+        $this->assertEquals($result, "");
         
         // Remove 2 lines from a 3-line text
         $oldText = "one\ntwo\nthree";
         $newText = "one";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "");
+        $this->assertEquals($result, "");
         
         $oldText = "one\ntwo\nthree";
         $newText = "two";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "");
+        $this->assertEquals($result, "");
         
         $oldText = "one\ntwo\nthree";
         $newText = "three";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "");
+        $this->assertEquals($result, "");
         
         // Remove 2 lines from a 4-line text
         $oldText = "one\ntwo\nthree\nfour";
         $newText = "one\nthree";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "");
+        $this->assertEquals($result, "");
         
         $oldText = "one\ntwo\nthree\nfour";
         $newText = "two\nfour";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "");
+        $this->assertEquals($result, "");
         
         $oldText = "one\ntwo\nthree\nfour";
         $newText = "one\nfour";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "");
+        $this->assertEquals($result, "");
         
         $oldText = "one\ntwo\nthree\nfour";
         $newText = "two\nthree";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "");
+        $this->assertEquals($result, "");
         
         // Remove 2 lines from a 5-line text
         $oldText = "one\ntwo\nthree\nfour\nfive";
         $newText = "one\nthree\nfive";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "");
+        $this->assertEquals($result, "");
     }
     
     function testExtractDiffNewBeginning(){
@@ -154,7 +144,7 @@ class TestMwAkismet extends UnitTestCase {
         $newText = "zero\none";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "zero\n");
+        $this->assertEquals($result, "zero\n");
     }
     
     function testExtractDiffNewEnd(){
@@ -165,7 +155,7 @@ class TestMwAkismet extends UnitTestCase {
         $newText = "one\ntwo";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "two\n");
+        $this->assertEquals($result, "two\n");
     }
     
     function testExtractDiffNewMiddle(){
@@ -176,21 +166,21 @@ class TestMwAkismet extends UnitTestCase {
         $newText = "one\nnew1\ntwo";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "new1\n");
+        $this->assertEquals($result, "new1\n");
         
         // Add 2 lines to a 2-line text
         $oldText = "one\ntwo";
         $newText = "one\nnew1\nnew2\ntwo";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "new1\nnew2\n");
+        $this->assertEquals($result, "new1\nnew2\n");
         
         // Add 2 lines to a 3-line text
         $oldText = "one\ntwo\nthree";
         $newText = "one\nnew1\ntwo\nnew2\nthree";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "new1\nnew2\n");
+        $this->assertEquals($result, "new1\nnew2\n");
     }
     
     function testExtractDiffAddAndRemove(){
@@ -201,55 +191,55 @@ class TestMwAkismet extends UnitTestCase {
         $newText = "two";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "two\n");
+        $this->assertEquals($result, "two\n");
         
         // Add 1 line and remove 1 line from a 2-line text
         $oldText = "one\ntwo";
         $newText = "new1\ntwo";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "new1\n");
+        $this->assertEquals($result, "new1\n");
         
         $oldText = "one\ntwo";
         $newText = "one\nnew2";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "new2\n");
+        $this->assertEquals($result, "new2\n");
         
         // Add 1 line and remove 1 line from a 3-line text
         $oldText = "one\ntwo\nthree";
         $newText = "one\nnew2\nthree";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "new2\n");
+        $this->assertEquals($result, "new2\n");
         
         // Add 1 line and remove 2 lines from a 3-line text
         $oldText = "one\ntwo\nthree";
         $newText = "one\nnew2";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "new2\n");
+        $this->assertEquals($result, "new2\n");
         
         // Add 2 lines and remove 1 line from a 3-line text
         $oldText = "one\ntwo\nthree";
         $newText = "one\nnew2\nnew3\nthree";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "new2\nnew3\n");
+        $this->assertEquals($result, "new2\nnew3\n");
         
         // Add 2 lines and remove 2 lines from a 3-line text
         $oldText = "one\ntwo\nthree";
         $newText = "one\nnew2\nnew3";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "new2\nnew3\n");
+        $this->assertEquals($result, "new2\nnew3\n");
         
         // Replace all 3 lines in a 3-line text
         $oldText = "one\ntwo\nthree";
         $newText = "new1\nnew2\nnew3";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "new1\nnew2\nnew3\n");
+        $this->assertEquals($result, "new1\nnew2\nnew3\n");
     }
     
     function testExtractDiffChangedLine(){
@@ -260,28 +250,28 @@ class TestMwAkismet extends UnitTestCase {
         $newText = "once\ntwo\nthree";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "once\n");
+        $this->assertEquals($result, "once\n");
         
         // Change middle line
         $oldText = "one\ntwo\nthree";
         $newText = "one\ntween\nthree";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "tween\n");
+        $this->assertEquals($result, "tween\n");
         
         // Change last line
         $oldText = "one\ntwo\nthree";
         $newText = "one\ntwo\nthrice";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "thrice\n");
+        $this->assertEquals($result, "thrice\n");
         
         // Change two lines in the middle
         $oldText = "one\ntwo\nthree\nfour";
         $newText = "one\ntwice\nthrice\nfour";
         
         $result = $mwAkismet->extractDiff($oldText, $newText);
-        $this->assertEqual($result, "twice\nthrice\n");
+        $this->assertEquals($result, "twice\nthrice\n");
     }
     
     function testQueryAkismet(){
@@ -292,19 +282,16 @@ class TestMwAkismet extends UnitTestCase {
         // This is guaranteed to return true, because of the author field
         // http://akismet.com/development/api/
         $isSpam = $mwAkismet->queryAkismet("viagra-test-123", "spamtext", "");
-        $this->assertEqual($isSpam, true);
+        $this->assertTrue($isSpam);
         
         // This text is super spammy, so hopefully Akismet will recognize it as spam.
         $isSpam = $mwAkismet->queryAkismet("linktome", $spamText, "");
-        $this->assertEqual($isSpam, true);
+        $this->assertTrue($isSpam);
         
         // This should look like a valid comment.
         $isSpam = $mwAkismet->queryAkismet("joe", "It is true.  I could not agree more with what you are saying.  Thanks for the post.", "");
-        $this->assertEqual($isSpam, false);
+        $this->assertFalse($isSpam);
     }
 }
-
-$test = &new TestMwAkismet();
-$test->run(new HtmlReporter());
 
 ?>

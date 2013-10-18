@@ -52,6 +52,10 @@ $wgExtensionMessagesFiles['AkismetAlias' ] = __DIR__ . '/Akismet.alias.php';
 // Register the edit handler
 $wgHooks['EditFilter'][] = array(new MwAkismet(), 'checkEditPageWithAkismet');
 
+// Add the unit tests
+$wgAutoloadClasses['MwAkismetTest'] = __DIR__ . '/test/*Test.php';
+$wgHooks['UnitTestsList'][] = 'AkismetHooks::onUnitTestsList';
+
 // Register the admin special page
 $wgSpecialPages['Akismet'] = 'SpecialAkismet';
 
