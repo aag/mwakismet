@@ -5,7 +5,7 @@
  *
  * File started on: 2008.02.01
  *
- * Copyright 2008 Adam Goforth
+ * Copyright 2008-2013 Adam Goforth
  *
  * This file is part of Mediawiki-Akismet.
  *
@@ -24,15 +24,11 @@
  *
  */
 
-
 class AkismetEdit
 {
     public static function createUserJudgeHTML($edit_id, $page_id, $timestamp, $username, $html_diff){
         $article_title = self::getArticleTitleFromID($page_id);
 
-		//$shortdiff = self::shortenDiffTable($html_diff);
-
-        // Truncate
         // Create the HTML
         $htmlout  = "<div style=\"border: 1px black solid;\">\n";
         $htmlout .= "<h4 style=\"background-color: lightgray; padding: 5px;\">" . $article_title . "<br />\n";
@@ -48,52 +44,8 @@ class AkismetEdit
         $htmlout .= "</div>\n";
         $htmlout .= "</div><br /><br />\n";
 
-
         return $htmlout;
     }
-
-	private static function shortenDiffTable($html_diff) {
-		$maxLength = 750;
-		$diffDOM = new DOMDocument();
-		$diffDOM->loadHTML($html_diff);
-
-		$insnodes = $diffDOM->getElementsByTagName("ins");
-		self::shortenLongNodes($insnodes, $maxLength);
-
-		$divnodes = $diffDOM->getElementsByTagName("div");
-		self::shortenLongNodes($divnodes, $maxLength);
-
-//		This is broken for some unknown reason
-//		self::removeExcessRows($diffDOM);
-
-		return $diffDOM->saveHTML();
-	}
-
-	private static function shortenLongNodes(&$nodeList, $maxLength) {
-		foreach ($nodeList as $node) {
-			if (strlen($node->nodeValue) > $maxLength) {
-				$value = $node->nodeValue;
-				//$value = htmlspecialchars($value);
-				$value = str_replace("&", "&amp;", $value);
-				$node->nodeValue = substr($value, 0, $maxLength);
-			}
-		}
-	}
-
-	private static function removeExcessRows(&$diffDOM) {
-		$maxRows = 5;
-		$trnodes = $diffDOM->getElementsByTagName("tr");
-
-		$rowCount = 0;
-		foreach ($trnodes as $node) {
-			if ($rowCount > $maxRows) {
-				$parent = $trnodes->item($rowCount)->parentNode;
-				$parent->removeChild($trnodes->item($rowCount));
-				echo("removing node ");
-			}
-			$rowCount++;
-		}
-	}
 
     private static function getArticleTitleFromID($page_id){
         $db =& wfGetDB( DB_SLAVE );
