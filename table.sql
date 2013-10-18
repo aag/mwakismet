@@ -8,4 +8,5 @@ CREATE TABLE mw_akismet_edits (
     content mediumblob,
     akismet_submit_diff mediumblob,
     html_diff longblob
-)
+);
+

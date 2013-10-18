@@ -16,18 +16,14 @@ Installing
 ----------
 1. Install Mediawiki and verify that it's working.
 
-2. Create the directory INSTALLDIR/extensions/Akismet on the server and copy 
+2. Create the directory `INSTALLDIR/extensions/Akismet` on the server and copy 
    the Mediawiki-Akismet files to the directory.
 
-3. Copy config_example.php to config.php and edit the variables in it to 
-   match your server settings.
+3. Run `php ./maintenance/update.php` on the command line from the top
+   MediaWiki directory.  This will create the mw_akismet_edits database table.
 
-4. Using a web browser, navigate to 
-   http://<MediawikiURL>/extensions/Akismet/install.php 
-   and click the "Recreate the table" link.
-
-5. Edit LocalSettings.php in the Mediawiki root directory.  Add these three 
-   lines near the end of the file, but before the "?>":
+4. Edit LocalSettings.php in the Mediawiki root directory.  Add these three 
+   lines near the end of the file, but before the `?>`:
    
    ```php
    // Akismet extension
@@ -36,12 +32,12 @@ Installing
    $wgMWAkismetURL = 'http://www.example.com/';
    ```
 
-6. Edit the $wgMWAkismetKey and $wgMWAkismetURL variables to match the API 
+5. Edit the $wgMWAkismetKey and $wgMWAkismetURL variables to match the API 
    key you got from Akismet and the location of your Mediawiki installation.
    If you don't have an Akismet API key yet, you can [create a free or paid
    account on the Akismet site](https://akismet.com/plans/) and get one.
 
-7. Make page edits and let Akismet catch the spam.
+6. Make page edits and let Akismet catch the spam.
 
 License
 -------

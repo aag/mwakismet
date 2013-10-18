@@ -41,9 +41,10 @@ $wgExtensionCredits['other'][] = array(
     'descriptionmsg' => 'akismet-desc',
 );
 
-// Autoload the plugin's main class and the special page class
+// Autoload the plugin's classes
 $wgAutoloadClasses['MwAkismet'] = __DIR__ . '/includes/MwAkismet.class.php';
 $wgAutoloadClasses['SpecialAkismet'] = __DIR__ . '/SpecialAkismet.php';
+$wgAutoloadClasses['AkismetHooks'] = __DIR__ . '/Akismet.hooks.php';
 
 // Autoload the localized UI strings
 $wgExtensionMessagesFiles['Akismet'] = __DIR__ . '/Akismet.i18n.php';
@@ -55,6 +56,9 @@ $wgHooks['EditFilter'][] = array(new MwAkismet(), 'checkEditPageWithAkismet');
 // Add the unit tests
 $wgAutoloadClasses['MwAkismetTest'] = __DIR__ . '/test/*Test.php';
 $wgHooks['UnitTestsList'][] = 'AkismetHooks::onUnitTestsList';
+
+// Register the DB schema update handler
+$wgHooks['LoadExtensionSchemaUpdates'][] = 'AkismetHooks::onSchemaUpdate';
 
 // Register the admin special page
 $wgSpecialPages['Akismet'] = 'SpecialAkismet';

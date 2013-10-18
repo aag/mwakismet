@@ -35,4 +35,10 @@ class AkismetHooks {
         $files = array_merge( $files, glob( "$testDir/*Test.php" ) );
 		return true;
 	}
+    
+    function onSchemaUpdate(DatabaseUpdater $updater) {
+        $updater->addExtensionTable('mw_akismet_edits',
+                                    __DIR__ . '/table.sql', true);
+        return true;
+    }
 }
