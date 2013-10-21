@@ -34,9 +34,13 @@ $messages['en'] = array(
     'akismet' => 'Akismet Admin', // Important! This is the string that appears on Special:SpecialPages
     'akismet-desc' => 'Adds Akismet integration to Mediawiki.',
     'spam-detected' => '<span style="color: red">Warning:</span> Akismet detected spam! Edit unsuccessful.',
-    'admin-page-desc' => 'This is the administration page for the Akismet extension.',
-    'num-edits-found' => 'Found {{PLURAL:$1|1 spam edit|$1 spam edits}}.',
+    'num-spam-edits' => '{{PLURAL:$1|1 spam edit|$1 spam edits}}',
     'not-spam' => 'not spam',
+    'delete-permanently' => 'delete permanently',
+    'page-name' => 'Page Name: $1',
+    'author-label' => 'Author: $1',
+    'submitted-on' => 'Submitted on: $1',
+    'save' => 'Save',
 );
  
 /** Deutsch (German)
@@ -46,9 +50,13 @@ $messages['de'] = array(
     'akismet' => 'Akismet Admin',
     'akismet-desc' => 'Adds Akismet integration to Mediawiki.',
     'spam-detected' => '<span style="color: red">Warnung:</span> Die Änderung wurde von Akismet als spam eingestuft! Bearbeitung nicht erfolgreich.',
-    'admin-page-desc' => 'Diese Seite ist die Administrationsseite für die Akismet Extension.',
-    'num-edits-found' => '{{PLURAL:$1|1 spam Änderung|$1 spam Änderungen}} gefunden.',
+    'num-spam-edits' => '{{PLURAL:$1|1 spam Änderung|$1 spam Änderungen}}',
     'not-spam' => 'nicht spam',
+    'delete-permanently' => 'endgültig löschen',
+    'page-name' => 'Seitenname: $1',
+    'author-label' => 'Autor: $1',
+    'submitted-on' => 'Speicherdatum: $1',
+    'save' => 'Speichern',
 );
 
 ?>

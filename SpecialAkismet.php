@@ -40,10 +40,12 @@ class SpecialAkismet extends SpecialPage
         $wgOut->addModuleStyles('mediawiki.action.history.diff');
 
         $rowcount = AkismetEdit::getSpamEditsCount();
+        $specialPageCSS = $this->getPageCSS();
 
-        $wgOut->addHTML(wfMsg('admin-page-desc'));
-        $wgOut->addHTML("<br /><br />");
-        $wgOut->addHTML(wfMsg('num-edits-found', $rowcount) . "<br /><br />");
+        $wgOut->addHTML($specialPageCSS);
+        $wgOut->addHTML(wfMsg('num-spam-edits', $rowcount) . "<br /><br />");
+
+        $wgOut->addHtml('<form action="" method="post">');
 
         // Print out the suspected spam
         $res = $db->select('akismet_edits', array('id', 'timestamp', 'page_id', 'username', 'content', 'akismet_submit_diff', 'html_diff'));
@@ -63,6 +65,54 @@ class SpecialAkismet extends SpecialPage
         }
 
         $db->freeResult($res);
+
+        $wgOut->addHtml('<button type="submit">' . wfMsg('save') . '</button>');
+        $wgOut->addHtml('</form>');
+    }
+
+    function getPageCSS() {
+        $pageCSS = <<<CSS
+        <style>
+            .spam-diff {
+                border: 1px #aaa solid;
+                border-radius: 3px;
+            }
+            .diff-header {
+                background-color: #dadada;
+                padding: 5px;
+                border-radius: 2px 2px 0 0;
+                border-bottom: 1px #aaa solid;
+                color: #333;
+            }
+            .diff-header h4 {
+                margin: 0;
+                padding: 0;
+                color: #333;
+            }
+            .diff-header p {
+                margin-bottom: 0;
+            }
+            .diff-holder {
+                height: 200px;
+                overflow: auto;
+            }
+            .diff-footer {
+                background-color: #dadada;
+                border-radius: 0 0 2px 2px;
+                border-top: 1px #aaa solid;
+            }
+            .diff-footer fieldset {
+                border: 0;
+                margin: 0;
+                padding: 0;
+            }
+            .diff-footer label {
+                margin-bottom: 5px;
+            }
+        </style>
+CSS;
+
+        return $pageCSS;
     }
 }
 

@@ -27,24 +27,33 @@
 class AkismetEdit
 {
     public static function createUserJudgeHTML($edit_id, $page_id, $timestamp, $username, $html_diff){
-        $article_title = self::getArticleTitleFromID($page_id);
         $notSpamMsg = wfMsg('not-spam');
+        $delSpamMsg = wfMsg('delete-permanently');
 
-        // Create the HTML
+        $page_title = self::getArticleTitleFromID($page_id);
+        $pageName = wfMsg('page-name', $page_title);
+        $authorLabel = wfMsg('author-label', $username);
+        $submittedOn = wfMsg('submitted-on', $timestamp);
+
         $htmlout = <<<HTML
-        <div style="border: 1px black solid;">
-            <h4 style="background-color: lightgray; padding: 5px;">
-                $article_title<br />
-                $timestamp<br />
-                $username
-            </h4>
-            <div class="diffholder" style="height: 200px; overflow: auto;">
+        <div class="spam-diff">
+            <div class="diff-header">
+                <h4>$pageName</h4>
+                <p>$authorLabel<br />
+                $submittedOn</p>
+            </div>
+            <div class="diff-holder">
                 $html_diff
             </div>
-            <div style="background-color: lightgray">
-                <label for="spam-$edit_id">
-                    <input type="checkbox" id="spam-$edit_id" name="not_spam[]" value="$edit_id" /> $notSpamMsg
-                </label>
+            <div class="diff-footer">
+                <fieldset>
+                    <label for="del-spam-$edit_id">
+                        <input type="radio" id="del-spam-$edit_id" name="spam_not_spam-$edit_id" value="del-$edit_id" checked="checked" /> $delSpamMsg
+                    </label>
+                    <label for="not-spam-$edit_id">
+                        <input type="radio" id="not-spam-$edit_id" name="spam_not_spam-$edit_id" value="not-spam-$edit_id" /> $notSpamMsg
+                    </label>
+                </fieldset>
             </div>
         </div><br /><br />
 HTML;
