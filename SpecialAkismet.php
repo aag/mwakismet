@@ -41,9 +41,9 @@ class SpecialAkismet extends SpecialPage
 
         $rowcount = AkismetEdit::getSpamEditsCount();
 
-        $wgOut->addHTML(wfMessage('admin-page-desc'));
+        $wgOut->addHTML(wfMsg('admin-page-desc'));
         $wgOut->addHTML("<br /><br />");
-        $wgOut->addHTML(wfMessage('num-edits-found', $rowcount) . "<br /><br />");
+        $wgOut->addHTML(wfMsg('num-edits-found', $rowcount) . "<br /><br />");
 
         // Print out the suspected spam
         $res = $db->select('akismet_edits', array('id', 'timestamp', 'page_id', 'username', 'content', 'akismet_submit_diff', 'html_diff'));

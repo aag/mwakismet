@@ -40,7 +40,7 @@ class AkismetEdit
         $htmlout .= "<div style=\"background-color: lightgray\">\n";
         $htmlout .= "<label for=\"spam-" . $edit_id . "\">\n";
         $htmlout .= "<input type=\"checkbox\" id=\"spam-" . $edit_id . "\" name=\"not_spam[]\" value=\"" . $edit_id . "\" />\n";
-        $htmlout .= wfMessage('not-spam') . "</label>\n";
+        $htmlout .= wfMsg('not-spam') . "</label>\n";
         $htmlout .= "</div>\n";
         $htmlout .= "</div><br /><br />\n";
 
