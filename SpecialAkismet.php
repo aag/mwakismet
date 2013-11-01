@@ -25,6 +25,7 @@
  */
 
 require_once(__DIR__ . "/includes/AkismetEdit.class.php");
+require_once(__DIR__ . "/includes/AkismetEditPager.class.php");
 
 class SpecialAkismet extends SpecialPage
 {
@@ -45,29 +46,20 @@ class SpecialAkismet extends SpecialPage
         $wgOut->addHTML($specialPageCSS);
         $wgOut->addHTML(wfMsg('num-spam-edits', $rowcount) . "<br /><br />");
 
-        $wgOut->addHtml('<form action="" method="post">');
+        // The Pager provides pagination of the edits
+		$pager = new AkismetEditPager();
+		if ($pager->getNumRows()) {
+            $wgOut->addHtml('<form action="" method="post">');
 
-        // Print out the suspected spam
-        $res = $db->select('akismet_edits', array('id', 'timestamp', 'page_id', 'username', 'content', 'akismet_submit_diff', 'html_diff'));
+			$wgOut->addHTML(
+				$pager->getNavigationBar() .
+				$pager->getBody() .
+				$pager->getNavigationBar()
+			);
 
-        $i = 0;
-
-        while (($row = $db->fetchObject($res)) && ($i < 100)){
-            // Get the page information
-            $edit_id = $row->id;
-            $page_id = $row->page_id;
-            $timestamp = wfTimestamp(TS_RFC2822, $row->timestamp);
-            $username = $row->username;
-            $difftext = $row->html_diff;
-
-            $wgOut->addHTML(AkismetEdit::createUserJudgeHTML($edit_id, $page_id, $timestamp, $username, $difftext));
-            $i++;
-        }
-
-        $db->freeResult($res);
-
-        $wgOut->addHtml('<button type="submit">' . wfMsg('save') . '</button>');
-        $wgOut->addHtml('</form>');
+            $wgOut->addHtml('<div class="spam-submit-button"><button type="submit">' . wfMsg('save') . '</button></div>');
+            $wgOut->addHtml('</form>');
+		}
     }
 
     function getPageCSS() {
@@ -76,6 +68,7 @@ class SpecialAkismet extends SpecialPage
             .spam-diff {
                 border: 1px #aaa solid;
                 border-radius: 3px;
+                margin-top: 10px;
             }
             .diff-header {
                 background-color: #dadada;
@@ -108,6 +101,9 @@ class SpecialAkismet extends SpecialPage
             }
             .diff-footer label {
                 margin-bottom: 5px;
+            }
+            .spam-submit-button {
+                margin-top: 10px;
             }
         </style>
 CSS;

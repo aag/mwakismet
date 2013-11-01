@@ -10,3 +10,5 @@ CREATE TABLE mw_akismet_edits (
     html_diff longblob
 );
 
+ALTER TABLE `mw_akismet_edits`
+ADD INDEX `timestamp` (`timestamp`);
