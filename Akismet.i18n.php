@@ -1,25 +1,25 @@
 <?php
 /*
- * Internationalization file for the Akismet Mediawiki extension.
+ * Internationalization file for the Akismet MediaWiki extension.
  *
  * File started on: 2007.10.16
  *
  * Copyright 2007-2013 Adam Goforth
  *
- * This file is part of Mediawiki-Akismet.
+ * This file is part of MediaWiki-Akismet.
  *
- * Mediawiki-Akismet is free software: you can redistribute it and/or modify
+ * MediaWiki-Akismet is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 2 of the License, or
  * (at your option) any later version.
  *
- * Mediawiki-Akismet is distributed in the hope that it will be useful,
+ * MediaWiki-Akismet is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Mediawiki-Akismet.  If not, see <http://www.gnu.org/licenses/>.
+ * along with MediaWiki-Akismet.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @file
  * @ingroup Extensions
@@ -32,7 +32,7 @@ $messages = array();
  */
 $messages['en'] = array(
     'akismet' => 'Akismet Admin', // Important! This is the string that appears on Special:SpecialPages
-    'akismet-desc' => 'Adds Akismet integration to Mediawiki.',
+    'akismet-desc' => 'Adds Akismet integration to MediaWiki.',
     'spam-detected' => '<span style="color: red">Warning:</span> Akismet detected spam! Edit unsuccessful.',
     'num-spam-edits' => '{{PLURAL:$1|1 spam edit|$1 spam edits}}',
     'not-spam' => 'not spam',
@@ -48,7 +48,7 @@ $messages['en'] = array(
  */
 $messages['de'] = array(
     'akismet' => 'Akismet Admin',
-    'akismet-desc' => 'Adds Akismet integration to Mediawiki.',
+    'akismet-desc' => 'Adds Akismet integration to MediaWiki.',
     'spam-detected' => '<span style="color: red">Warnung:</span> Die Änderung wurde von Akismet als spam eingestuft! Bearbeitung nicht erfolgreich.',
     'num-spam-edits' => '{{PLURAL:$1|1 spam Änderung|$1 spam Änderungen}}',
     'not-spam' => 'nicht spam',
