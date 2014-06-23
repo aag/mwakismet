@@ -76,7 +76,7 @@ HTML;
     public static function getSpamEditsCount(){
         $db =& wfGetDB( DB_SLAVE );
 
-        $res = $db->query("SELECT COUNT(*) as n FROM mw_akismet_edits");
+        $res = $db->query("SELECT COUNT(*) as n FROM akismet_edits");
         $row = $db->fetchObject( $res );
         $rowcount = intval( $row->n );
 
